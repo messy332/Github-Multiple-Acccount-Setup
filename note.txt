@@ -1,6 +1,6 @@
 STEP 1 — Check if Git is installed
 Open terminal (OS / VS Code terminal):
-                          git --version
+                                                      git --version
 
 STEP 2 — Create SSH keys for BOTH accounts
 PERSONAL ACCOUNT: 
@@ -9,7 +9,7 @@ Save it as:
 ~/.ssh/id_ed25519_personal
 
 INSTITUTIONAL ACCOUNT:
-                      ssh-keygen -t ed25519 -C "school_email@school.edu"
+                  ssh-keygen -t ed25519 -C "school_email@school.edu"
 Save it as:
 ~/.ssh/id_ed25519_school
 
@@ -78,7 +78,9 @@ Don’t use:
           git remote add origin https://github.com/...
 Instead ALWAYS use: 
                     git remote set-url origin git@github-personal
+                    git remote add origin git@github-personal:username/nameproject
 
+$ g
 
 TROUBLESHOT: 
 $ ls -la ~/.ssh
