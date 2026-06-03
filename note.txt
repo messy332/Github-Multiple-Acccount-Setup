@@ -1,1 +1,75 @@
+STEP 1 — Check if Git is installed
+Open terminal (OS / VS Code terminal):
+                          git --version
 
+STEP 2 — Create SSH keys for BOTH accounts
+Personal account
+ssh-keygen -t ed25519 -C "personal_email@gmail.com"
+NOTE: Enter file in which to save the key: ~/.ssh/id_ed25519_personal
+Institutional account
+ssh-keygen -t ed25519 -C "school_email@school.edu"
+Save it as:
+~/.ssh/id_ed25519_school
+
+STEP 3 — Add SSH keys to ssh-agent
+Start agent:
+eval "$(ssh-agent -s)"
+Add both keys:
+ssh-add ~/.ssh/id_ed25519_personal
+ssh-add ~/.ssh/id_ed25519_school
+
+STEP 4 — Add SSH keys to GitHub
+Show your public keys:
+Personal:
+cat ~/.ssh/id_ed25519_personal.pub
+School:
+cat ~/.ssh/id_ed25519_school.pub
+Add them here:
+Personal → https://github.com/settings/keys
+School → same link but logged into institutional account
+Click “New SSH Key” and paste each one.
+
+STEP 5 — Create SSH config file
+Open config file:
+nano ~/.ssh/config
+Paste this:
+# Personal GitHub
+Host github-personal
+    HostName github.com
+    User git
+    IdentityFile ~/.ssh/id_ed25519_personal
+# Institutional GitHub
+Host github-school
+    HostName github.com
+    User git
+    IdentityFile ~/.ssh/id_ed25519_school
+Save:
+CTRL + X
+Y
+Enter
+
+STEP 6 — Test connections
+Personal:
+ssh -T git@github-personal
+School:
+ssh -T git@github-school
+You should see:
+Hi username! You've successfully authenticated
+
+STEP 7 — Use correct account per project
+Personal repo:
+git clone git@github-personal:username/repo.git
+School repo:
+git clone git@github-school:username/repo.git
+
+STEP 8 — Set identity per project (IMPORTANT)
+Inside each project folder:
+Personal project:
+git config user.name "Your Name"
+git config user.email "personal@email.com"
+School project:
+git config user.name "Your Name"
+git config user.email "school@email.com"
+NOTE: 
+Don’t use: git remote add origin https://github.com/...
+Instead ALWAYS use: git remote set-url origin git@github-personal
