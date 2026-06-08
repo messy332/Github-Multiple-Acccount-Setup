@@ -80,10 +80,10 @@ NOTE DON`T USED:
                 git remote add origin https://github.com/...
 
 USED: 
+# Create remote repositories
      git remote add origin git@github-personal:username/nameproject
-
-     git remote set-url origin git@github-personal
-     git remote set-url origin git@github.com:username/nameproject
+# Commands only change the remote URL named origin
+     git remote set-url origin git@github-personal:username/nameproject
      git remote set-url origin https://github.com/username/nameproject
 TROUBLESHOT: 
 $ ls -la ~/.ssh
