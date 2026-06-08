@@ -2,15 +2,17 @@ STEP1 — CHECK IF GIT IS INSTALLED
 Open terminal (OS / VS Code terminal):
                                       git --version
 
+
 STEP2 — CREATE SSH KEYS FOT BOTH ACCOUNTS
 PERSONAL ACCOUNT: 
                  ssh-keygen -t ed25519 -C "personal_email@gmail.com"
 Save it as:
-~/.ssh/id_ed25519_personal
+            ~/.ssh/id_ed25519_personal
 INSTITUTIONAL ACCOUNT:
-                  ssh-keygen -t ed25519 -C "school_email@school.edu"
+                      ssh-keygen -t ed25519 -C "school_email@school.edu"
 Save it as:
-~/.ssh/id_ed25519_school
+           ~/.ssh/id_ed25519_school
+
 
 STEP3 — ADD SSH KEYS TO SSH-AGENT
 START AGENT:
@@ -20,21 +22,23 @@ START AGENT:
 CHECK: 
       $ ssh-add -l
 
+
 STEP4 — ADD SSH KEYS TO GITHUB
 Show your public keys:
-Personal:
+PERSONAL:
           cat ~/.ssh/id_ed25519_personal.pub
-School:
+SCHOOL:
           cat ~/.ssh/id_ed25519_school.pub
-Add them here:
-              Personal - https://github.com/settings/keys
-              School - same link but logged into institutional account
+ADD THEM HERE:
+              PERSONAL - https://github.com/settings/keys
+              SCHOOL -  https://github.com/settings/keys (logged into institutional account)
 Click “New SSH Key” and paste each one.
+
 
 STEP 5 — CREATE SSH CONFIG FILE
 Open config file:
                   nano ~/.ssh/config
-Paste this:
+PASTE THIS:
 # Personal GitHub
 Host github-personal
     HostName github.com
@@ -67,16 +71,20 @@ SCHOOL REPOSITORIES:
 STEP 8 — SET IDENTITY PER PROJECT
 Inside each project folder:
 PERSONAL PROJECT:
-                  git config user.name "Your Name"
-                  git config user.email "personal@email.com"
+                  git config --global user.name "Your Name"
+                  git config --global user.email "personal@gmail.com"
 SCHOOL PROJECT:
-                  git config user.name "Your Name"
-                  git config user.email "school@email.com"
+                  git config --global user.name "Your Name"
+                  git config --global user.email "school@gmail.com"
 NOTE DON`T USED: 
                 git remote add origin https://github.com/...
+
 USED: 
-     git remote set-url origin git@github-personal
      git remote add origin git@github-personal:username/nameproject
+
+     git remote set-url origin git@github-personal
+     git remote set-url origin git@github.com:username/nameproject
+     git remote set-url origin https://github.com/username/nameproject
 TROUBLESHOT: 
 $ ls -la ~/.ssh
 
